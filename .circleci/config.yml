@@ -17,8 +17,13 @@ jobs:
       - run:
           name: "Inspect directory"
           command: |
-            pwd
+            pwd            
+            echo "Inspect working_directory"
             ls -ahi
+            echo "Inspect Src"
+            ls -ahi src
+            echo "Inspect node_modules"
+            ls -ahi node_modules
   test:
     <<: *image
     steps:
