@@ -10,9 +10,9 @@ jobs:
       - checkout
       - run: npm i
       - save_cache:
-          key: npm-packages-{{ checksum "package.json" }}
+          key: npm-packages--{{ checksum "package.json" }}
           paths:
-            - src/node_modules
+            - node_modules
       - run: npm run lint
       - run:
           name: "Inspect directory"
