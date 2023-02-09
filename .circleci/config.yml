@@ -1,0 +1,7 @@
+version: 2.1
+image: &image
+  docker:
+    - image: circleci/node:13.8.0
+  working_directory: ~/
+jobs:
+workflows:
