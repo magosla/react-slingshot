@@ -12,7 +12,7 @@ jobs:
       - save_cache:
           key: "npm-packages"
           paths:
-            - /src/node_modules
+            - src/node_modules
       - run: npm run lint
   test:
     <<: *image
