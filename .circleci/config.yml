@@ -8,12 +8,12 @@ jobs:
     <<: *image
     steps:
       - checkout
-      - run npm i
+      - run: npm i
       - save_cache:
           key: "npm-packages-{{ checksum: packages.json }}"
           paths:
             - /src/node_modules
-      - run npm run lint
+      - run: npm run lint
   test:
     <<: *image
     steps:
@@ -21,13 +21,13 @@ jobs:
       - restore_cache:
           keys:
             - "npm-packages-{{ checksum: 'package.json' }}"
-      - run npm i
-      - run npm run test
+      - run: npm i
+      - run: npm run test
   analyze:
     <<: *image
     steps:
       - checkout
-      - run npm audit
+      - run: npm audit
 workflows:
   development:
     jobs:
