@@ -30,7 +30,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - npm-packages-{{ checksum "package.json" }}
+            - npm-packages--{{ checksum "package.json" }}
       - run: npm i
       - run: npm run test
   analyze:
