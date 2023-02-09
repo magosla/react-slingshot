@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: npm i
       - save_cache:
-          key: "npm-packages-{{ checksum: packages.json }}"
+          key: "npm-packages"
           paths:
             - /src/node_modules
       - run: npm run lint
@@ -20,7 +20,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - "npm-packages-{{ checksum: 'package.json' }}"
+            - "npm-packages"
       - run: npm i
       - run: npm run test
   analyze:
