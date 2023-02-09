@@ -4,4 +4,37 @@ image: &image
     - image: circleci/node:13.8.0
   working_directory: ~/
 jobs:
+  build:
+    <<: *image
+    steps:
+      - checkout
+      - run npm i
+      - save_cache:
+          key: "npm-packages-{{ checksum: packages.json }}"
+          paths:
+            - /src/node_modules
+      - run npm run lint
+  test:
+    <<: *image
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - "npm-packages-{{ checksum: 'package.json' }}"
+      - run npm i
+      - run npm run test
+  analyze:
+    <<: *image
+    steps:
+      - checkout
+      - run npm audit
 workflows:
+  development:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - analyze:
+          requires:
+            - test
